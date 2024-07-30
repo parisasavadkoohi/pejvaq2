@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* رنگ‌ها و دایره‌ها برای وضعیت‌های مختلف */
+.reserved::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: red; /* رنگ برای روزهای رزرو شده */
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.available::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: green; /* رنگ برای روزهای قابل رزرو */
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.disabled::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: gray; /* رنگ برای روزهای غیر فعال */
+  border-radius: 50%;
+  margin: 0 auto;
+}
