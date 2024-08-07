@@ -49,13 +49,13 @@ const Accordion: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 img-shadow p-9 mt-9 rounded-lg">
       <div>
-        <button className="w-full bg-gray-200 text-right p-4" onClick={() => toggleIndex(0)}>
+        <button className="w-full text-white bg-orange-400 font-bold text-right p-4" onClick={() => toggleIndex(0)}>
           انتخاب تاریخ
         </button>
         {activeIndex === 0 && (
-          <div className="p-4 border border-gray-200">
+          <div className="p-4 border text-white text-right rounded-xl border-gray-200">
             <CustomDatePicker
               date={date}
               setDate={setDate}
@@ -69,11 +69,11 @@ const Accordion: React.FC = () => {
       </div>
 
       <div>
-        <button className="w-full bg-gray-200 text-right p-4" onClick={() => toggleIndex(1)}>
+        <button className="w-full bg-orange-400 text-white font-bold text-right p-4" onClick={() => toggleIndex(1)}>
           انتخاب ساعت
         </button>
         {activeIndex === 1 && (
-          <div className="p-4 border border-gray-200">
+          <div className="p-4 border  text-right border-gray-200">
             <TimePicker
               time={time}
               setTime={setTime}
@@ -85,11 +85,11 @@ const Accordion: React.FC = () => {
       </div>
 
       <div>
-        <button className="w-full bg-gray-200 text-right p-4" onClick={() => toggleIndex(2)}>
+        <button className="w-full bg-orange-400 text-white font-bold text-right p-4" onClick={() => toggleIndex(2)}>
           اطلاعات مشتری
         </button>
         {activeIndex === 2 && (
-          <div className="p-4 border border-gray-200">
+          <div className="p-4 border border-gray-200 text-white text-right">
             <CustomerInfo
               customerInfo={customerInfo}
               setCustomerInfo={setCustomerInfo}
