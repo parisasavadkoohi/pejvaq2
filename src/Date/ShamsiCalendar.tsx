@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Calendar, utils, DayValue } from 'react-modern-calendar-datepicker';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+import axios from 'axios';
 import 'tailwindcss/tailwind.css';
 
 interface Reservation {
@@ -18,7 +18,11 @@ interface CustomDay {
   className: string;
 }
 
-const ShamsiCalendar: React.FC = () => {
+interface ShamsiCalendarProps {
+  onSelectDate: (date: DayValue) => void;
+}
+
+const ShamsiCalendar: React.FC<ShamsiCalendarProps> = ({ onSelectDate }) => {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [selectedDay, setSelectedDay] = useState<DayValue>(utils('fa').getToday());
   const [customDaysClassName, setCustomDaysClassName] = useState<CustomDay[]>([]);
@@ -54,13 +58,12 @@ const ShamsiCalendar: React.FC = () => {
         year,
         month,
         day,
-        className: 'reserved' // تنظیم کلاس برای روزهای رزرو شده
+        className: 'reserved'
       };
     });
 
-    // افزودن کلاس برای روزهای قابل رزرو و غیر فعال
     const allDays: CustomDay[] = [];
-    for (let i = 1; i <= 31; i++) { // فرض بر این است که حداکثر روزها 31 روز است
+    for (let i = 1; i <= 31; i++) {
       allDays.push({
         year: selectedDay?.year || utils('fa').getToday().year,
         month: selectedDay?.month || utils('fa').getToday().month,
@@ -72,18 +75,23 @@ const ShamsiCalendar: React.FC = () => {
     setCustomDaysClassName(allDays);
   };
 
+  const handleDaySelect = (day: DayValue) => {
+    setSelectedDay(day);
+    onSelectDate(day);
+  };
+
   const filteredReservations = reservations.filter(
     (reservation) => reservation.date === formatSelectedDay(selectedDay)
   );
 
   return (
-    <div className="p-4">
+    <div className="p-4 justify-center">
       <div className="mb-4">
         <Calendar
           value={selectedDay}
-          onChange={setSelectedDay}
+          onChange={handleDaySelect}
           shouldHighlightWeekends
-          locale="fa" // تنظیم زبان به فارسی
+          locale="fa"
           customDaysClassName={customDaysClassName}
         />
       </div>
@@ -102,7 +110,7 @@ const ShamsiCalendar: React.FC = () => {
         )}
       </div>
       <div className="mt-4 p-4 border-t">
-        <h3 className="text-md font-semibold">وضعیت‌ها:</h3>
+        <h3 className="text-md font-semibold"></h3>
         <div className="flex items-center mb-1">
           <span className="w-4 h-4 rounded-full bg-red-500 mr-2"></span>
           <p className="text-sm">رزرو شده</p>

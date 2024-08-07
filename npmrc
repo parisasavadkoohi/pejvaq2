@@ -1,0 +1,11 @@
+registry=https://arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/registry/ 
+                        
+always-auth=true
+; begin auth token
+//arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/registry/:username=ArashKatchooi
+//arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/registry/:_password=[ZGlsbDVzbGkzc3B3eDdpbjIyb2J5ZWNubGZvZTNtMnBrZmY1NW91b29yc2Rnenptd3k1YQ==]
+//arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/registry/:email=npm requires email to be set but doesn't use the value
+//arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/:username=ArashKatchooi
+//arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/:_password=[ZGlsbDVzbGkzc3B3eDdpbjIyb2J5ZWNubGZvZTNtMnBrZmY1NW91b29yc2Rnenptd3k1YQ==]
+//arashkatchooi.pkgs.visualstudio.com/ecomtechhtml/_packaging/EcomReactCore/npm/:email=npm requires email to be set but doesn't use the value
+; end auth token
