@@ -19,7 +19,6 @@ const Accordion: React.FC = () => {
   const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
 
-  // Fetch booked dates and times from API
   const fetchBookedDates = async () => {
     try {
       const response = await axios.post('http://pejvaq.posginger.com/odata/ProductReservation/ListReservations?productId=66a9dedce877793cc44eec66');
@@ -42,7 +41,6 @@ const Accordion: React.FC = () => {
     }
   };
 
-  // Generate available dates
   const generateAvailableDates = (bookedDates: string[]): string[] => {
     const availableDates: string[] = [];
     const start = new Date();
@@ -58,47 +56,38 @@ const Accordion: React.FC = () => {
     return availableDates;
   };
 
-// Generate all possible time slots for a day as intervals (e.g., 15:00-16:00)
-const generateAllTimeIntervals = (): string[] => {
-  const intervals = [];
-  for (let hour = 15; hour < 18; hour++) {
-    const startTime = `${hour.toString().padStart(2, '0')}:00`;
-    const endTime = `${(hour + 1).toString().padStart(2, '0')}:00`;
-    intervals.push(`${startTime} - ${endTime}`);
-  }
-  return intervals;
-};
+  const generateAllTimeIntervals = (): string[] => {
+    const intervals = [];
+    for (let hour = 15; hour < 18; hour++) {
+      const startTime = `${hour.toString().padStart(2, '0')}:00`;
+      const endTime = `${(hour + 1).toString().padStart(2, '0')}:00`;
+      intervals.push(`${startTime} تا ${endTime}`);
+    }
+    return intervals;
+  };
 
-// Fetch available time intervals from API for a specific date
-const fetchAvailableTimes = async (selectedDate: string) => {
-  try {
-    const response = await axios.post(
-      `http://pejvaq.posginger.com/odata/ProductReservation/ListReservations?productId=66a9dedce877793cc44eec66`
-    );
+  const fetchAvailableTimes = async (selectedDate: string) => {
+    try {
+      const response = await axios.post(`http://pejvaq.posginger.com/odata/ProductReservation/ListReservations?productId=66a9dedce877793cc44eec66`);
+      const reservations = response.data.Data;
+      const reservedIntervals = reservations
+        .filter((reservation: any) => reservation.Date.startsWith(selectedDate))
+        .map((reservation: any) => {
+          const startTime = new Date(reservation.Date).toISOString().split('T')[1].substring(0, 5);
+          const endTime = `${(parseInt(startTime.split(':')[0]) + 1).toString().padStart(2, '0')}:00`;
+          return `${startTime} تا ${endTime}`;
+        });
 
-    console.log('Available times response:', response.data); // Log API response
+      const allTimeIntervals = generateAllTimeIntervals();
+      const availableIntervals = allTimeIntervals.filter((interval) => !reservedIntervals.includes(interval));
 
-    const reservations = response.data.Data;
-    const reservedIntervals = reservations
-      .filter((reservation: any) => reservation.Date.startsWith(selectedDate))
-      .map((reservation: any) => {
-        const startTime = new Date(reservation.Date).toISOString().split('T')[1].substring(0, 5);
-        const endTime = `${(parseInt(startTime.split(':')[0]) + 1).toString().padStart(2, '0')}:00`;
-        return `${startTime} ${endTime}`;
-      });
+      setAvailableTimes(availableIntervals);
 
-    const allTimeIntervals = generateAllTimeIntervals();
-    const availableIntervals = allTimeIntervals.filter((interval) => !reservedIntervals.includes(interval));
-
-    setAvailableTimes(availableIntervals);
-
-  } catch (error) {
-    console.error(`Error fetching available times for date ${selectedDate}:`, error);
-    setAvailableTimes([]); // Reset available times on error
-  }
-};
-
-
+    } catch (error) {
+      console.error(`Error fetching available times for date ${selectedDate}:`, error);
+      setAvailableTimes([]); // Reset available times on error
+    }
+  };
 
   useEffect(() => {
     fetchBookedDates();
@@ -112,6 +101,11 @@ const fetchAvailableTimes = async (selectedDate: string) => {
 
   const toggleIndex = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const handleFinalConfirmation = () => {
+    alert('رزرو شما با موفقیت ثبت شد');
+    setActiveIndex(null); // Reset the accordion
   };
 
   return (
@@ -161,11 +155,30 @@ const fetchAvailableTimes = async (selectedDate: string) => {
               customerInfo={customerInfo}
               setCustomerInfo={setCustomerInfo}
               prevStep={() => setActiveIndex(1)}
-              nextStep={() => {
-                alert('رزرو شما با موفقیت ثبت شد');
-                setActiveIndex(null);
-              }}
+              nextStep={() => setActiveIndex(3)} // Move to confirmation step
             />
+          </div>
+        )}
+      </div>
+
+      {/* Confirmation Step */}
+      <div>
+        <button className="w-full font-bold hover:text-white bg-orange-500 rounded-xl text-right p-4" onClick={() => toggleIndex(3)}>
+          تأیید نهایی
+        </button>
+        {activeIndex === 3 && (
+          <div className="p-5 border text-right font-serif border-gray-300">
+            <h3 className="font-bold mb-2">لطفاً اطلاعات زیر را تأیید کنید:</h3>
+            <p><strong>نام:</strong> {customerInfo.name}</p>
+            <p><strong>تلفن:</strong> {customerInfo.tel}</p>
+            <p><strong>تاریخ انتخاب شده:</strong> {date}</p>
+            <p><strong>ساعت انتخاب شده:</strong> {time}</p>
+            <button className="mt-4 w-full bg-green-500 text-white font-bold rounded-lg p-2" onClick={handleFinalConfirmation}>
+              تأیید و ثبت نهایی
+            </button>
+            <button className="mt-2 w-full bg-red-500 text-white font-bold rounded-lg p-2" onClick={() => setActiveIndex(2)}>
+              بازگشت به مرحله قبل
+            </button>
           </div>
         )}
       </div>
