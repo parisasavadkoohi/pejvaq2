@@ -26,10 +26,10 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ customerInfo, setCustomerIn
         className="border p-2 mb-4 w-full"
         required />
       <div className="flex justify-between">
-        <button onClick={prevStep} className="bg-gray-500 text-white p-2 rounded">
+        <button onClick={prevStep} className="bg-gray-500 hover:bg-orange-600 text-white p-2 rounded">
           مرحله قبل
         </button>
-        <button onClick={nextStep} className="bg-blue-500 text-white p-2 rounded">
+        <button onClick={nextStep} className="bg-blue-500 hover:bg-orange-600 text-white p-2 rounded">
            ثبت نهایی
         </button>
       </div>
