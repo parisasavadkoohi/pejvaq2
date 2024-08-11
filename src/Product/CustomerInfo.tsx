@@ -16,14 +16,15 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ customerInfo, setCustomerIn
         placeholder="نام"
         value={customerInfo.name}
         onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
-        className="border p-2 mb-4 w-full"
+        className="border p-2 mb-4 w-full"dir='rtl'
         required />
       <input
         type="tel"
+        
         placeholder="شماره تماس"
         value={customerInfo.tel}
         onChange={(e) => setCustomerInfo({ ...customerInfo, tel: e.target.value })}
-        className="border p-2 mb-4 w-full"
+        className="border p-2 mb-4 w-full"dir='rtl'
         required />
       <div className="flex justify-between">
         <button onClick={prevStep} className="bg-gray-500 hover:bg-orange-600 text-white p-2 rounded">

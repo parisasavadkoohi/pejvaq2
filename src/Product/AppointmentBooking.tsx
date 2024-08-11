@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { fetchBookedDates, fetchAvailableTimes } from '../apiService'; // Import API functions
 import CustomDatePicker from './CustomDatePicker';
 import TimePicker from './TimePicker';
 import CustomerInfo from './CustomerInfo';
@@ -19,27 +19,43 @@ const Accordion: React.FC = () => {
   const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
 
-  const fetchBookedDates = async () => {
-    try {
-      const response = await axios.post('http://pejvaq.posginger.com/odata/ProductReservation/ListReservations?productId=66a9dedce877793cc44eec66');
-      const reservations = response.data.Data;
-      const bookedDates = reservations.map((reservation: any) => new Date(reservation.Date).toISOString().split('T')[0]);
+  useEffect(() => {
+    const getBookedDates = async () => {
+      try {
+        const bookedDates = await fetchBookedDates();
+        setBookedDates(bookedDates);
+        setDisabledDates(bookedDates);
 
-      setBookedDates(bookedDates);
-      setDisabledDates(bookedDates);
+        const allDates = generateAvailableDates(bookedDates);
+        setAvailableDates(allDates);
 
-      const allDates = generateAvailableDates(bookedDates);
-      setAvailableDates(allDates);
-
-      if (allDates.length > 0) {
-        setDate(allDates[0]); // Select the first available date
+        if (allDates.length > 0) {
+          setDate(allDates[0]); // Select the first available date
+        }
+      } catch (error) {
+        console.error('Error fetching booked dates:', error);
+        alert('مشکلی در دریافت اطلاعات رزروها وجود دارد. لطفاً مجدداً تلاش کنید.');
       }
+    };
 
-    } catch (error) {
-      console.error('Error fetching booked dates:', error);
-      alert('مشکلی در دریافت اطلاعات رزروها وجود دارد. لطفاً مجدداً تلاش کنید.');
+    getBookedDates();
+  }, []);
+
+  useEffect(() => {
+    if (date) {
+      const getAvailableTimes = async () => {
+        try {
+          const times = await fetchAvailableTimes(date);
+          setAvailableTimes(times);
+        } catch (error) {
+          console.error(`Error fetching available times for date ${date}:`, error);
+          setAvailableTimes([]); // Reset available times on error
+        }
+      };
+
+      getAvailableTimes();
     }
-  };
+  }, [date]);
 
   const generateAvailableDates = (bookedDates: string[]): string[] => {
     const availableDates: string[] = [];
@@ -55,49 +71,6 @@ const Accordion: React.FC = () => {
     }
     return availableDates;
   };
-
-  const generateAllTimeIntervals = (): string[] => {
-    const intervals = [];
-    for (let hour = 15; hour < 18; hour++) {
-      const startTime = `${hour.toString().padStart(2, '0')}:00`;
-      const endTime = `${(hour + 1).toString().padStart(2, '0')}:00`;
-      intervals.push(`${startTime} تا ${endTime}`);
-    }
-    return intervals;
-  };
-
-  const fetchAvailableTimes = async (selectedDate: string) => {
-    try {
-      const response = await axios.post(`http://pejvaq.posginger.com/odata/ProductReservation/ListReservations?productId=66a9dedce877793cc44eec66`);
-      const reservations = response.data.Data;
-      const reservedIntervals = reservations
-        .filter((reservation: any) => reservation.Date.startsWith(selectedDate))
-        .map((reservation: any) => {
-          const startTime = new Date(reservation.Date).toISOString().split('T')[1].substring(0, 5);
-          const endTime = `${(parseInt(startTime.split(':')[0]) + 1).toString().padStart(2, '0')}:00`;
-          return `${startTime} تا ${endTime}`;
-        });
-
-      const allTimeIntervals = generateAllTimeIntervals();
-      const availableIntervals = allTimeIntervals.filter((interval) => !reservedIntervals.includes(interval));
-
-      setAvailableTimes(availableIntervals);
-
-    } catch (error) {
-      console.error(`Error fetching available times for date ${selectedDate}:`, error);
-      setAvailableTimes([]); // Reset available times on error
-    }
-  };
-
-  useEffect(() => {
-    fetchBookedDates();
-  }, []);
-
-  useEffect(() => {
-    if (date) {
-      fetchAvailableTimes(date);
-    }
-  }, [date]);
 
   const toggleIndex = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
