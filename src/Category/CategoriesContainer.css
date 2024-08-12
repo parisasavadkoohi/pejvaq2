@@ -1,0 +1,29 @@
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.category-button {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  border: 2px solid #ff8800; 
+  border-radius: 50%; 
+  background-color: #ffffff; 
+  color: #ff8800; 
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.category-button:hover {
+  background-color: #ff8800;
+  color: #ffffff; 
+}
+
+.category-button span {
+  display: block;
+  font-size: 14px; 
+}

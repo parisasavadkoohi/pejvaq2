@@ -1,7 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { IAdvanceSearch, Category } from '../type/Category';
 
-// Define the base URL for your API
 const BASE_URL = 'http://pejvaq.posginger.com/odata/ProductReservation';
+const CATEGORY_BASE_URL = 'http://pejvaq.posginger.com/odata/Product/GetAdvancedSearchDD';
+
+const http = axios.create({
+  baseURL: CATEGORY_BASE_URL,
+});
 
 // Fetch booked dates
 export const fetchBookedDates = async (): Promise<string[]> => {
@@ -45,7 +50,50 @@ const generateAllTimeIntervals = (): string[] => {
   for (let hour = 15; hour < 18; hour++) {
     const startTime = `${hour.toString().padStart(2, '0')}:00`;
     const endTime = `${(hour + 1).toString().padStart(2, '0')}:00`;
-    intervals.push(`${startTime} تا ${endTime}`);
+    intervals.push(`${startTime} - ${endTime}`);
   }
   return intervals;
+};
+
+// Fetch categories
+export const fetchCategories = async (): Promise<{ Categories: Category[] }> => {
+  try {
+    const response = await http.post('', {
+      keyword: '',
+      storeId: '647d0b08d8d3b935cc246e64',
+      categoryId: '',
+      tagId: '',
+      adminRoute: false,
+      subCategory: true,
+      clickTree: true
+    });
+    return { Categories: response.data.Data };
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+};
+
+export const getAdvancedSearchDD = async (
+  keyword: string,
+  storeId: string,
+  categoryId: string,
+  subCategory: boolean,
+  clickTree: boolean,
+  tagId?: string
+): Promise<AxiosResponse<IAdvanceSearch>> => {
+  try {
+    return await http.post('', {
+      keyword,
+      storeId,
+      categoryId,
+      tagId,
+      adminRoute: false,
+      subCategory,
+      clickTree
+    });
+  } catch (error) {
+    console.error('Error fetching advanced search data:', error);
+    throw error;
+  }
 };

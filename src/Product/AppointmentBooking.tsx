@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchBookedDates, fetchAvailableTimes } from '../apiService'; // Import API functions
+import { fetchBookedDates, fetchAvailableTimes } from '../components/apiService'; // Import API functions
 import CustomDatePicker from './CustomDatePicker';
 import TimePicker from './TimePicker';
 import CustomerInfo from './CustomerInfo';

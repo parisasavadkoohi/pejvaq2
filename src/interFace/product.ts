@@ -1,11 +1,7 @@
-//import { ManageInventoryMethod } from "../../../utils/enums/manageInventoryMethod";
-//import { ProductType } from "../../enums/productType";
-//import { IProductReviewOverview } from "./peoductDetail/ProductReviewOverview";
+
 import { IPicture } from "./picture";
 import { IPrice } from "./price";
-//import { IProductAttribute } from "./productAttribute";
-//import { IProductPicture } from "./productPicture";
-//import { ISpecificationAttribute } from "./productSpecification";
+
 
 export interface IProduct {
   Id: string;
