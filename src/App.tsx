@@ -30,7 +30,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="app-container mx-auto p-4">
-        <h1 className="text-center text-3xl font-bold mb-8">خدمات مرتبط</h1>
+        <h1 className="text-right text-3xl font-bold border-b-2 border-gray-500 sm:border-b-4 sm:border-blue-500  "dir='rtl'>خدمات مرتبط</h1>
         <RelatedProducts productId={productId} />
       </div>
     </Fragment>

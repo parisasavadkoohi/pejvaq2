@@ -6,8 +6,6 @@ import "aos/dist/aos.css";
 import axios, { AxiosResponse } from "axios";
 import { IProduct } from "../interFace/product";
 
-
-
 interface ProductDetailProps {
   productId: number;
 }
@@ -18,7 +16,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
   const [error, setError] = useState<string | null>(null);
   var id = "سایه-oulanao";
   var customerId = "63b947669032e1274c1a0d24";
-  //https://back.pejvaq.com/odata/Product/GetProductDetail?key=%D8%B3%D8%A7%DB%8C%D9%87-oulanao&customerId=63b947669032e1274c1a0d24
 
   useEffect(() => {
     AOS.init({
@@ -29,13 +26,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
   }, []);
 
   const get = async (id: string): Promise<AxiosResponse<any>> => {
-    //var CustomerId = getUserId() || SMService.GetItem("currentCustomer");
     return await axios.get<any>(
       `https://back.pejvaq.com/odata/Product/GetProductDetail?key=${id}&customerId=${customerId}`
     );
   };
+
   const fetchProduct = async () => {
-    // try {
     await get(id)
       .then((response) => setProduct(response.data))
       .catch((error: any) => setError(error.message))
@@ -59,55 +55,49 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
   }
 
   const images = product.PictureModels.map((image) => ({
-    original: "https://back.pejvaq.com"+image.ImageUrl,
-    thumbnail: "https://back.pejvaq.com"+image.ThumbImageUrl,
+    original: "https://back.pejvaq.com" + image.ImageUrl,
+    thumbnail: "https://back.pejvaq.com" + image.ThumbImageUrl,
   }));
 
   return (
     <div
-      className="container max-w-4xl mx-auto bg-white shadow-md rounded-md h- overflow-hidden p-8"
+      className="container max-w-4xl mx-auto bg-white shadow-md rounded-md overflow-hidden p-8"
       data-aos="zoom-in-down"
       dir="rtl"
     >
-      <h2 className="text-2xl font-bold mb-4 text-shadow" data-aos="fade-up">
+      <h2 className="text-2xl font-bold mb-4  text-shadow" data-aos="fade-up">
         {product.Name}
       </h2>
-      <div className="mb-4 h-100">
+      <div className="mb-4 h-100 ">
         <ImageGallery items={images} data-aos="flip-left" />
       </div>
-      <p className="text-gray-700 mb-4" data-aos="fade-up">
-  
-      </p>
+      <div className="text-gray-700 mb-4" data-aos="fade-up">
+        <span
+          dangerouslySetInnerHTML={{
+            __html: product?.ShortDescription || "",
+          }}
+        />
+      </div>
       <h1 className="text-lg font-semibold mb-4" dir="rtl" data-aos="fade-up">
-        {product.MetaTitle
-        }
+        {product.MetaTitle}
       </h1>
       <div className="text-lg font-semibold mb-4" dir="rtl" data-aos="fade-up">
-        قیمت: {product.ProductPrice.Price} تومان
+        قیمت: {product.ProductPrice.Price}
       </div>
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2" dir="rtl" data-aos="fade-up">
-          توضیحات:      {product.
-FullDescription
-}
+          توضیحات:
         </h3>
-        <ul className="list-disc list-inside" dir="rtl" data-aos="flip-left">
-          <li>
-            <strong>کارت بهداشت:</strong> 
-            {/* {product.ProductSpecifications.FullDescription} */}
-          </li>
-          <li>
-            <strong>گواهی تخصصی آرایشگری:</strong>{" "}
-            {/* {product.ProductSpecifications.dimensions} */}
-          </li>
-         
-        </ul>
+        <div
+          className="text-gray-700 font-serif text-xl"
+          dangerouslySetInnerHTML={{
+            __html: product?.FullDescription || "",
+          }}
+          data-aos="flip-left"
+        />
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
-
-
-
