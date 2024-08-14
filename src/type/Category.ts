@@ -12,8 +12,26 @@ export interface IAdvanceSearch {
 
 }
 
+
+
+
 export interface ICategory {
-  id: string;
-  name: string;
- 
+  Id: string;
+  Name: string;
+  Description?: string | null;
+  
+}
+
+export interface IAdvanceSearch {
+  Categories: ICategory[];
+}
+export interface SubCategory {
+  Id: string;
+  Name: string;
+}
+
+export interface Category {
+  Id: string;
+  Name: string;
+  SubCategories: SubCategory[];
 }

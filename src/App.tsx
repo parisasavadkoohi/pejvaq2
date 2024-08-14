@@ -1,60 +1,39 @@
 import React, { Fragment, useState } from 'react';
-//import ShamsiCalendar from './Date/ShamsiCalendar';
 import './index.css';
-//import { DayValue } from 'react-modern-calendar-datepicker';
 import AppointmentBooking from './Product/AppointmentBooking';
 import ProductDetail from './components/ProductDetail';
-//import DropdownMenu from './Reservedrop/DropodownMenue';
-
-
-//import Hero from './Home/Hero/Hero';
-//import Services from './Home/Services/ServicaData';
-///import WhereToBuy from './Home/Wheretobuy/WhereToBuy';
-//import AppBanner from './Home/AppBanner/AppBanner';
-//import Footer from './Home/Footer/Footer';
 import CategoriesContainer from './Category/CategoriesContainer';
+import RelatedProducts from './components/RelatedProducts';
 
-//<Hero/>
-//<Services/>
-//<WhereToBuy/>
-//<AppBanner/>
-//<Footer/>
-
-//<DropdownMenu/>
-//<AppointmentBooking/>
-//<ProductDetail productId={productId}/>
-//<AppointmentBooking/>
-//<ProductDetail productId={productId}/>
-//<ProductDetail productId={1}/>
-//<AppointmentBooking/>
-//grid sm:grid-flow-col-dense w-full overflow-x-hidden
 const App: React.FC = () => {
-  
+  // تغییر نوع داده productId به number
   const [productId, setProductId] = useState<number>(1);
-  const storeId = "someStoreId"; // مقدار صحیح وارد کنید
-  const keyword = "someKeyword"; // مقدار صحیح وارد کنید
-  const categoryId = "someCategoryId"; // مقدار صحیح وارد کنید
+  const storeId = 'someStoreId';
+  const keyword = 'someKeyword';
+  const categoryId = 'someCategoryId';
   const subCategory = true;
 
   return (
- <Fragment>
+    <Fragment>
+      <div className="grid grid-col-reverse gap-4 w-50 p-9 img-shadow">
+        <CategoriesContainer
+          storeId={storeId}
+          keyword={keyword}
+          categoryId={categoryId}
+          subCategory={subCategory}
+        />
+      </div>
 
-<div className='grid grid-col-reverse gap-4 w-50 p-9'>
-<CategoriesContainer 
+      <div className="grid sm:grid-flow-col-dense w-full overflow-x-hidden img-shadow" dir="rtl">
+        <ProductDetail productId={productId} />
+        <AppointmentBooking />
+      </div>
 
-storeId={storeId}
-keyword={keyword}
-categoryId={categoryId}
-subCategory={subCategory} />
-     </div>
-     
-
-<div className=' grid sm:grid-flow-col-dense w-full overflow-x-hidden' dir='rtl'>
-<ProductDetail productId={productId}/>
-<AppointmentBooking/>
- 
-</div>
-</Fragment>
+      <div className="app-container mx-auto p-4">
+        <h1 className="text-center text-3xl font-bold mb-8">خدمات مرتبط</h1>
+        <RelatedProducts productId={productId} />
+      </div>
+    </Fragment>
   );
 };
 

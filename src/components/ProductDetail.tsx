@@ -65,14 +65,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
 
   return (
     <div
-      className="container max-w-4xl mx-auto bg-white shadow-md rounded-md overflow-hidden p-8"
+      className="container max-w-4xl mx-auto bg-white shadow-md rounded-md h- overflow-hidden p-8"
       data-aos="zoom-in-down"
       dir="rtl"
     >
       <h2 className="text-2xl font-bold mb-4 text-shadow" data-aos="fade-up">
         {product.Name}
       </h2>
-      <div className="mb-4">
+      <div className="mb-4 h-100">
         <ImageGallery items={images} data-aos="flip-left" />
       </div>
       <p className="text-gray-700 mb-4" data-aos="fade-up">
@@ -111,9 +111,3 @@ export default ProductDetail;
 
 
 
-//<li>
-//<strong>نوع سرویس:</strong> {product.specifications.color}
-//</li>
-//<li>
-//<strong>مدت زمان:</strong> {product.specifications.batteryLife}
-//</li>

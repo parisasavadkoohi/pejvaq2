@@ -1,0 +1,51 @@
+.related-products-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .related-products-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .related-products-list li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .related-products-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .related-products-list h2 {
+    margin: 0 0 10px;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  
+  .related-products-list p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .loading, .error {
+    font-size: 1.25rem;
+    color: #888;
+    text-align: center;
+  }
+  
+  .no-products-found {
+    font-size: 1.25rem;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

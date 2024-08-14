@@ -1,15 +1,17 @@
 import axios, { AxiosResponse } from 'axios';
 import { IAdvanceSearch, Category } from '../type/Category';
 
-const BASE_URL = 'http://pejvaq.posginger.com/odata/ProductReservation';
+// تعریف URL پایه برای درخواست‌های مربوط به دسته‌بندی‌ها
 const CATEGORY_BASE_URL = 'http://pejvaq.posginger.com/odata/Product/GetAdvancedSearchDD';
 
+// ایجاد نمونه axios با URL پایه
 const http = axios.create({
   baseURL: CATEGORY_BASE_URL,
 });
 
 // Fetch booked dates
 export const fetchBookedDates = async (): Promise<string[]> => {
+  const BASE_URL = 'http://pejvaq.posginger.com/odata/ProductReservation';
   try {
     const response = await axios.post(`${BASE_URL}/ListReservations?productId=66a9dedce877793cc44eec66`);
     const reservations = response.data.Data;
@@ -23,6 +25,7 @@ export const fetchBookedDates = async (): Promise<string[]> => {
 
 // Fetch available times for a specific date
 export const fetchAvailableTimes = async (selectedDate: string): Promise<string[]> => {
+  const BASE_URL = 'http://pejvaq.posginger.com/odata/ProductReservation';
   try {
     const response = await axios.post(`${BASE_URL}/ListReservations?productId=66a9dedce877793cc44eec66`);
     const reservations = response.data.Data;
@@ -56,44 +59,36 @@ const generateAllTimeIntervals = (): string[] => {
 };
 
 // Fetch categories
+
 export const fetchCategories = async (): Promise<{ Categories: Category[] }> => {
   try {
-    const response = await http.post('', {
-      keyword: '',
-      storeId: '647d0b08d8d3b935cc246e64',
-      categoryId: '',
-      tagId: '',
-      adminRoute: false,
-      subCategory: true,
-      clickTree: true
+    const response = await axios.get(CATEGORY_BASE_URL, {
+      params: {
+        keyword: '',
+        storeId: '647d0b08d8d3b935cc246e64',
+        categoryId: '',
+        tagId: '',
+        adminRoute: false,
+        subCategory: true,
+        clickTree: true
+      }
     });
-    return { Categories: response.data.Data };
+    return { Categories: response.data.Categories };
   } catch (error) {
     console.error('Error fetching categories:', error);
     throw error;
   }
 };
 
-export const getAdvancedSearchDD = async (
-  keyword: string,
-  storeId: string,
-  categoryId: string,
-  subCategory: boolean,
-  clickTree: boolean,
-  tagId?: string
-): Promise<AxiosResponse<IAdvanceSearch>> => {
+export const fetchRelatedProducts = async (productId: number): Promise<any[]> => {
   try {
-    return await http.post('', {
-      keyword,
-      storeId,
-      categoryId,
-      tagId,
-      adminRoute: false,
-      subCategory,
-      clickTree
-    });
+    const response = await fetch(`https://back.pejvaq.com/odata/Product/GetList?type=4&productThumbPictureSize=200&storeId=65e70c2a2c455ed1127d8492&productId=${productId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
   } catch (error) {
-    console.error('Error fetching advanced search data:', error);
-    throw error;
+    console.error('Error fetching related products:', error);
+    return []; 
   }
 };

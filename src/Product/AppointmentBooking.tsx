@@ -82,7 +82,7 @@ const Accordion: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4 border-white shadow-orange-800 img-shadow pt-9 p-8">
+    <div className="container space-y-4 border-white shadow-orange-800 justify-center img-shadow pt-9 pl-12 ml-9">
       <div>
         <button className="w-full hover:text-white bg-orange-500 rounded-xl font-bold text-right p-4" onClick={() => toggleIndex(0)}>
           انتخاب تاریخ
