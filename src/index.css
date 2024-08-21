@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 
 /* رنگ‌ها و دایره‌ها برای وضعیت‌های مختلف */
 .reserved::before {
@@ -38,3 +41,63 @@
 .img-shadow2{
   filter:drop-shadow(0px 30px 0px 0px #c5b14ceb)
 }
+.group:hover .group-hover\\:flex {
+  display: flex;
+}
+.group-hover\\:visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.group .group-hover\\:hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+.blink {
+  animation: goldenGlow 2s ease-in-out infinite;
+}
+
+@keyframes goldenGlow {
+  0%, 100% {
+    opacity: 2;
+    
+    
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(150%) sepia(50%) hue-rotate(30deg) saturate(300%);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.7), 0 0 60px rgba(255, 215, 0, 0.6);
+  }
+}
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb li {
+  margin-right: 8px;
+}
+
+.breadcrumb li a {
+  color: #000409;
+  text-decoration: none;
+}
+
+.breadcrumb li a:hover {
+  text-decoration: underline;
+}
+/* ProductDetail.css */
+
+/* تنظیم اندازه تصاویر اصلی گالری */
+.image-gallery-image {
+  max-width: 100%; /* تنظیم حداکثر عرض */
+  max-height: 400px; /* تنظیم حداکثر ارتفاع */
+  object-fit: contain; /* حفظ نسبت ابعاد تصویر */
+}
+
+/* تنظیم اندازه تصاویر بندانگشتی گالری */
+.image-gallery-thumbnail {
+  max-width: 100px; /* تنظیم حداکثر عرض بندانگشتی */
+  max-height: 100px; /* تنظیم حداکثر ارتفاع بندانگشتی */
+}
+

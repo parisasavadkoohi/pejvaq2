@@ -6,16 +6,17 @@ import "aos/dist/aos.css";
 import axios, { AxiosResponse } from "axios";
 import { IProduct } from "../interFace/product";
 
+
 interface ProductDetailProps {
-  productId: number;
+  productId: string;
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  var id = "سایه-oulanao";
-  var customerId = "63b947669032e1274c1a0d24";
+  const [isExpanded, setIsExpanded] = useState<boolean>(false); // State for collapsing description
+  const customerId = "63b947669032e1274c1a0d24";
 
   useEffect(() => {
     AOS.init({
@@ -26,21 +27,27 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
   }, []);
 
   const get = async (id: string): Promise<AxiosResponse<any>> => {
-    return await axios.get<any>(
-      `https://back.pejvaq.com/odata/Product/GetProductDetail?key=${id}&customerId=${customerId}`
-    );
+    const url = `https://back.pejvaq.com/odata/Product/GetProductDetail?key=${id}&customerId=${customerId}`;
+    return await axios.get<any>(url);
   };
 
   const fetchProduct = async () => {
-    await get(id)
-      .then((response) => setProduct(response.data))
-      .catch((error: any) => setError(error.message))
-      .finally(() => setLoading(false));
+    try {
+      const response = await get(productId);
+      setProduct(response.data);
+    } catch (error: any) {
+      console.error("Error fetching product:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    fetchProduct();
-  }, []);
+    if (productId) {
+      fetchProduct();
+    }
+  }, [productId]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -59,22 +66,26 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
     thumbnail: "https://back.pejvaq.com" + image.ThumbImageUrl,
   }));
 
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <div
-      className="container max-w-4xl mx-auto bg-white shadow-md rounded-md overflow-hidden p-8"
+      className="max-w-8xl mx-8 sm:grid-flow-col-dense  bg-white shadow-md rounded-md overflow-hidden p-10"
       data-aos="zoom-in-down"
       dir="rtl"
     >
-      <h2 className="text-2xl font-bold mb-4  text-shadow" data-aos="fade-up">
+      <h2 className="text-2xl font-bold mb-4 text-shadow" data-aos="fade-up">
         {product.Name}
       </h2>
-      <div className="mb-4 h-100 ">
+      <div className="mb-4 h-50 w-100 p-2 content-center justify-between">
         <ImageGallery items={images} data-aos="flip-left" />
       </div>
-      <div className="text-gray-700 mb-4" data-aos="fade-up">
+      <div className="text-gray-700 justify-between w-full h-24 mb-4" data-aos="fade-up">
         <span
           dangerouslySetInnerHTML={{
-            __html: product?.ShortDescription || "",
+            __html: product.ShortDescription || "",
           }}
         />
       </div>
@@ -89,12 +100,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
           توضیحات:
         </h3>
         <div
-          className="text-gray-700 font-serif text-xl"
+          className={`text-gray-700 font-serif text-xl ${isExpanded ? "max-h-full" : "max-h-20 overflow-hidden"}`}
           dangerouslySetInnerHTML={{
-            __html: product?.FullDescription || "",
+            __html: product.FullDescription || "",
           }}
           data-aos="flip-left"
         />
+        <button
+          className="text-orange-500 font-bold mt-2"
+          onClick={toggleDescription}
+        >
+          {isExpanded ? "نمایش کمتر" : "ادامه مطلب"}
+        </button>
       </div>
     </div>
   );

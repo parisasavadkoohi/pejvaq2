@@ -1,0 +1,54 @@
+.product-card {
+    /* Basic styling for the product card */
+    border: none; /* Remove border */
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .product-card img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .product-card:hover {
+    /* Add border and shadow on hover */
+    border: 2px solid #007bff; /* Blue border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product-card h2 {
+    color: #333;
+  }
+  
+  .product-card p {
+    color: #666;
+  }
+  
+  .product-card .text-lg {
+    color: #333;
+  }
+  
+  .product-card button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  .product-card button .mr-2 {
+    margin-right: 8px;
+  }
+  .btn{
+    position: relative ;
+    right:36%;
+  }

@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+    .banner-style {
+        height: 50vh; /* Adjust for tablets and larger screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .banner-style {
+        height: 70vh; /* Adjust for desktops and larger screens */
+    }
+}

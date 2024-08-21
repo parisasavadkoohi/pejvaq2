@@ -1,56 +1,35 @@
-import Banner1 from '../../assests/banner4.png'
+import React from 'react';
+import Banner1 from '../../components/assets/images/banner4.png';
+import googlePlay from '../../components/assets/images/googlePlay.png';
+import sibApp from '../../components/assets/images/sibApp.png';
 
-import googlePlay from '../../assests/googlePlay.png'
-import sibApp from '../../assests/sibApp.png'
-
-const BannerStyle:React.CSSProperties={
-    backgroundImage:`url(${Banner1})`,
-    backgroundPosition:"center",
-    backgroundSize:"cover",
-    backgroundRepeat:"no-repeat",
-    width:"100%",
-    height:"100%",
-
-};
-
-
-
-
-
-const AppBanner:React.FC=()=>{
-    return(
-        <>
-        <div className="containeer my-14">
-            <div  className='sm-min-h-[900px] sm:flex sm:justify-start sm:items-center p-20 rounded-xl z-20' style={BannerStyle}>
-
-            
-            <div className='space-y-6 max-w-xl mx-auto'>
-<h1 className='text-2xl text-center sm:text-4xl font-bold text-white img-shadow'> DOWNLOAD APP</h1>
-<p className='text-center sm:px-28 text-white hidden sm:inline-block' data-aos="fade-up" data-aos-dalay="300">
-Fruits and vegetables are one of the four basic food groups that occupy a special place among the nutrients. These groups have a number of benefits that the consumer should recommend to maintain health. Similarly,
-</p>
-<div className='flex justify-center items-center gap-2'>
-<a href='#'>
-    <img className='max-w-[250px] sm:max-w-[120px] rounded md:max-w-[200px]' src={googlePlay} alt='googlePlay'/>
-</a>
-<a href='#'>
-    <img className='max-w-[250px] sm:max-w-[120px] rounded md:max-w-[200px]' src={sibApp} alt='sibApp'/>
-</a>
-
-</div>
-            </div>
-
-
+const AppBanner: React.FC = () => {
+    return (
+        <div className="relative w-full h-[35vh] sm:h-[50vh] lg:h-[100vh] p-5 overflow-hidden">
+            <img
+                src={Banner1}
+                alt="Banner"
+                className="absolute inset-0 w-full h-full object-cover"
+            />
+          
         </div>
-   
-        </div>
-        
-        
-        
-        </>
-
-    )
-
+    );
 }
 
 export default AppBanner;
+//<div className="relative flex flex-col justify-center items-center p-6 sm:p-10 lg:p-20 text-center text-white z-10">
+//<h1 className="text-xl sm:text-3xl lg:text-4xl font-bold mb-4">
+   
+//</h1>
+//<p className="hidden sm:block sm:px-28 mb-4" data-aos="fade-up" data-aos-delay="300">
+   
+//</p>
+///<div className="flex flex-col sm:flex-row gap-2">
+    //<a href="#">
+        //<img className="max-w-[200px] sm:max-w-[120px] rounded" src={googlePlay} alt="Google Play" />
+   /// </a>
+   // <a href="#">
+        //<img className="max-w-[200px] sm:max-w-[120px] rounded" src={sibApp} alt="SIB App" />
+    //</a>
+//</div>
+//</div>

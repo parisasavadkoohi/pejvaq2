@@ -1,11 +1,18 @@
 import React, { Fragment, useState } from 'react';
 import './index.css';
-import AppointmentBooking from './Product/AppointmentBooking';
-import ProductDetail from './components/ProductDetail';
-import CategoriesContainer from './Category/CategoriesContainer';
-import RelatedProducts from './components/RelatedProducts';
+
+import {BrowserRouter as Router ,Routes,Route} from 'react-router-dom'
+import ProductDetailPage from './pages/ProductDetailPage';
+import Navbar from './Home/Navbar/Navbar';
+
+
+import Homepage from './pages/Homepage';
+import ProductList from './components/ProductList/ProductList';
+import Store from './components/Store/Store';
+import Footer from './Home/Footer/Footer';
 
 const App: React.FC = () => {
+  const [sideBar, setSideBar] = useState<boolean>(false);
   // تغییر نوع داده productId به number
   const [productId, setProductId] = useState<number>(1);
   const storeId = 'someStoreId';
@@ -14,26 +21,20 @@ const App: React.FC = () => {
   const subCategory = true;
 
   return (
-    <Fragment>
-      <div className="grid grid-col-reverse gap-4 w-50 p-9 img-shadow">
-        <CategoriesContainer
-          storeId={storeId}
-          keyword={keyword}
-          categoryId={categoryId}
-          subCategory={subCategory}
-        />
-      </div>
 
-      <div className="grid sm:grid-flow-col-dense w-full overflow-x-hidden img-shadow" dir="rtl">
-        <ProductDetail productId={productId} />
-        <AppointmentBooking />
-      </div>
-
-      <div className="app-container mx-auto p-4">
-        <h1 className="text-right text-3xl font-bold border-b-2 border-gray-500 sm:border-b-4 sm:border-blue-500  "dir='rtl'>خدمات مرتبط</h1>
-        <RelatedProducts productId={productId} />
-      </div>
-    </Fragment>
+  <Router>
+    <Navbar/>
+     <Routes>
+    
+      
+      <Route path='/' element={<Homepage/>}/>
+      <Route path="/productList" element={<ProductList />} />
+      <Route path="/ProductDetailPage/:productId" element={<ProductDetailPage />} />
+      <Route path='/Store'  element={<Store/>}  />
+   
+     </Routes>
+  <Footer/>
+      </Router>
   );
 };
 
