@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
                         <h1 className="text-4xl font-bold text-center md:text-right">
                             White Orange
                         </h1>
-                        <p className="text-center md:text-right text-xl max-w-[320px] mx-auto md:mr-0 md:ml-auto" data-aos="fade-up" data-aos-delay="300">
+                        <p className="text-center md:text-right text-xl max-w-[320px] mx-auto md:mr-0 md:ml-auto"  >
                             "با محصولات بی‌نظیر ما، زیبایی‌تان را به اوج برسانید! در فروشگاه ما، مجموعه‌ای از بهترین لوازم آرایشی و بهداشتی را با قیمت‌های ویژه پیدا کنید. کیفیت بالا، انتخاب متنوع و تخفیف‌های فوق‌العاده، همه در انتظار شماست. همین حالا خرید کنید و درخشندگی خود را دوچندان کنید!"
                         </p>
                     </div>
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                             <FaTelegram className="text-3xl hover:scale-105 duration-300" />
                         </div>
                         <div className="flex justify-center md:justify-end">
-                            <img src={imgFooter} alt="makeup" className="w-[200px] sm:w-[300px] md:w-[400px] img-shadow mt-4 mx-auto md:ml-0 md:mr-auto" />
+                            <img src={imgFooter} alt="makeup" className="w-[100px] sm:w-[300px] md:w-[400px] lg:w-32 img-shadow mt-4 mx-auto md:ml-0 md:mr-auto" />
                         </div>
                     </div>
                 </div>
