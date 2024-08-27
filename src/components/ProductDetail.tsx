@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios, { AxiosResponse } from "axios";
 import { IProduct } from "../interFace/product";
-
 
 interface ProductDetailProps {
   productId: string;
@@ -15,8 +15,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [isExpanded, setIsExpanded] = useState<boolean>(false); // State for collapsing description
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const customerId = "63b947669032e1274c1a0d24";
+  
+  // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     AOS.init({
@@ -48,6 +51,27 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
       fetchProduct();
     }
   }, [productId]);
+
+  const [cartItems, setCartItems] = useState<IProduct[]>([]);
+
+  // Load cart items from localStorage on initial load
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  const addToCart = () => {
+    if (product) {
+      const updatedCartItems = [...cartItems, product];
+      setCartItems(updatedCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems)); // Store in localStorage
+
+      alert(`${product.Name} به سبد خرید اضافه شد!`);
+      navigate("/CartStore"); // Navigate to cart page after adding the product to cart
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -82,7 +106,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
       <div className="mb-4 h-50 w-100 p-2 content-center justify-between">
         <ImageGallery items={images} data-aos="flip-left" />
       </div>
-      <div className="text-gray-700 justify-between w-full h-24 mb-4" data-aos="fade-up">
+      <div
+        className="text-gray-700 justify-between w-full h-24 mb-4"
+        data-aos="fade-up"
+      >
         <span
           dangerouslySetInnerHTML={{
             __html: product.ShortDescription || "",
@@ -95,12 +122,20 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productId }) => {
       <div className="text-lg font-semibold mb-4" dir="rtl" data-aos="fade-up">
         قیمت: {product.ProductPrice.Price}
       </div>
+      <button
+        className="bg-orange-500 text-white py-2 px-4 rounded mt-4"
+        onClick={addToCart}
+      >
+        اضافه به سبد خرید
+      </button>
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2" dir="rtl" data-aos="fade-up">
           توضیحات:
         </h3>
         <div
-          className={`text-gray-700 font-serif text-xl ${isExpanded ? "max-h-full" : "max-h-20 overflow-hidden"}`}
+          className={`text-gray-700 font-serif text-xl ${
+            isExpanded ? "max-h-full" : "max-h-20 overflow-hidden"
+          }`}
           dangerouslySetInnerHTML={{
             __html: product.FullDescription || "",
           }}

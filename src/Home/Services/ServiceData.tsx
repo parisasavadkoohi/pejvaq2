@@ -75,7 +75,7 @@ const Services: React.FC = () => {
                 <div className='grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 place-items-center mt-8'>
                     {ServiceData.map((item) => (
                         <div key={item.id} data-aos-delay={item.aosDelay} className='p-4 text-center space-y-4'>
-                            <img className='max-w-[100px] mx-auto hover:scale-110 rounded-full transition-transform duration-300 bg-red-300' src={item.image} alt={item.title} onClick={() => { navigate("/ProductDetailPage") }} />
+                            <img className='max-w-[100px] mx-auto hover:scale-110 rounded-full transition-transform duration-300 bg-red-300' src={item.image} alt={item.title} onClick={() => { navigate("/ProductShop") }} />
                             <h1 className='font-bold text-gray-900'>{item.title}</h1>
                         </div>
                     ))}

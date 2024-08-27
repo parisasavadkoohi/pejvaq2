@@ -10,6 +10,9 @@ import Homepage from './pages/Homepage';
 import ProductList from './components/ProductList/ProductList';
 import Store from './components/Store/Store';
 import Footer from './Home/Footer/Footer';
+import ProductShop from './components/productshop/ProductShop';
+import CartPage from './components/Cart/CartPage';
+import CartStore from './components/Store/CartStore';
 
 const App: React.FC = () => {
   const [sideBar, setSideBar] = useState<boolean>(false);
@@ -26,11 +29,16 @@ const App: React.FC = () => {
     <Navbar/>
      <Routes>
     
-      
+   
       <Route path='/' element={<Homepage/>}/>
       <Route path="/productList" element={<ProductList />} />
       <Route path="/ProductDetailPage/:productId" element={<ProductDetailPage />} />
       <Route path='/Store'  element={<Store/>}  />
+      <Route path='/ProductShop' element={<ProductShop/>}/>
+      <Route path='/ProductDetailShop' element={<ProductDetailPage/>}/>
+      <Route path='/CartPage' element={<CartPage/>}/>
+      <Route path='/CartStore' element={<CartStore/>}/>
+
    
      </Routes>
   <Footer/>

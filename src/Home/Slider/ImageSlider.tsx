@@ -2,12 +2,14 @@ import React from 'react';
 import Slider from 'react-slick';
 import image1 from '../../components/assets/images/بنر کیف.png';
 import image2 from '../../components/assets/images/بنرلوازم ارایش2.png';
-import image3 from '../../components/assets/images/بنر لوازم ارایشی3.png'
+import image3 from '../../components/assets/images/بنر لوازم ارایشی3.png';
+import image4 from '../../components/assets/images/banner4.png';
 const ImageSlider: React.FC = () => {
   const images = [
     image1,
     image2,
-    image3
+    image3,
+    image4
   
   ];
 
@@ -22,7 +24,7 @@ const ImageSlider: React.FC = () => {
   };
 
   return (
-    <div className="slider-container mx-auto  w-full">
+    <div className="slider-container mx-auto  w-full ">
       <Slider {...settings}>
         {images.map((image, index) => (
           <div key={index} className="slider-item w-full">

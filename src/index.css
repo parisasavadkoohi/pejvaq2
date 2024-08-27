@@ -4,6 +4,9 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+body {
+  padding-top: 64px; /* ارتفاع نوار ناوبری */
+}
 
 /* رنگ‌ها و دایره‌ها برای وضعیت‌های مختلف */
 .reserved::before {
@@ -101,3 +104,6 @@
   max-height: 100px; /* تنظیم حداکثر ارتفاع بندانگشتی */
 }
 
+.main-content {
+  padding-top: 64px; /* ارتفاع نوار ناوبری */
+}

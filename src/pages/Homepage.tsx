@@ -1,6 +1,6 @@
 import React, {  Fragment, useState } from 'react';
 
-import AppBanner from '../Home/AppBanner/AppBanner';
+
 
 import Services from '../Home/Services/ServiceData';
 
@@ -12,6 +12,7 @@ import ImageSlider from '../Home/Slider/ImageSlider';
 import ProductList from '../components/ProductList/ProductList';
 import RelatedProducts from '../components/RelatedProducts';
 import SliderHome from '../components/sliderhome/SliderHome';
+import BannerServices from '../Home/BANNER/bannerservices';
 
 //id={productId} customerId={customerId}
 //<AppBanner/>
@@ -23,7 +24,7 @@ const Homepage: React.FC = () => {
   return (
 
  <Fragment>
-  <div className=' justify-center'>
+  <div className='   justify-center w-full'>
   <ImageSlider/>
  
     <Services/>
@@ -34,8 +35,10 @@ const Homepage: React.FC = () => {
    <div className='container pl-24'>
    <BanerService/>
    </div>
+   <RelatedProducts  productId={parseInt(productId, 10)} />
+   <BannerServices/>
     <WhereToBuy/>
-    
+   
  <br/>
  <br/>
 

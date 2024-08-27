@@ -34,10 +34,9 @@ export interface IProduct {
   ItemProvince: string;
   UnitName: string;
   Weight?: Number;
-  //Pictures: IProductPicture[];
+
   Price: number;
- // ProductSpecifications?: ISpecificationAttribute[];
-  //ProductAttributes?: IProductAttribute[];
+
   StoreId?: string;
  // ProductReviewOverview?: IProductReviewOverview;
   StockAvailability: string;
@@ -50,4 +49,9 @@ export interface IProduct {
   //ManageInventoryMethod: ManageInventoryMethod;
   DisplayStockAvailability: boolean;
   ProductTags?: string[];
+  // فایل product.ts در پوشه interFace
+
+  
+
+
 }
