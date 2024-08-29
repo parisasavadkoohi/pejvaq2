@@ -34,10 +34,10 @@ const BanerService: React.FC = () => {
     return (
         <Fragment>
             <div className=' '>
-                <div className='text-center '>
+                <div className='text-center'>
                    
                 </div>
-                <div className='grid grid-cols-2 gap-4 sm:flex- place-items-center'>
+                <div className='grid lg:grid-cols-2 gap-4 sm:flex- place-items-center lg:ml-9 sm:grid-col-1 mr-20'>
                     {ServiceData1.map((item) => (
                         <div key={item.id}  className=' text-center space-y-4'>
                             <img className=' mx-auto hover:scale-110 transition-transform duration-300 rounded-xl'  onClick={() => { navigate("/ProductDetailPage") }} src={item.image1} />

@@ -13,6 +13,7 @@ import ProductList from '../components/ProductList/ProductList';
 import RelatedProducts from '../components/RelatedProducts';
 import SliderHome from '../components/sliderhome/SliderHome';
 import BannerServices from '../Home/BANNER/bannerservices';
+import GlassesTryOn from '../components/GlassesOnFace/GlassesTryOn';
 
 //id={productId} customerId={customerId}
 //<AppBanner/>
@@ -38,6 +39,7 @@ const Homepage: React.FC = () => {
    <RelatedProducts  productId={parseInt(productId, 10)} />
    <BannerServices/>
     <WhereToBuy/>
+    <GlassesTryOn/>
    
  <br/>
  <br/>

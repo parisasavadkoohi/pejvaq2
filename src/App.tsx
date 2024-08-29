@@ -13,6 +13,8 @@ import Footer from './Home/Footer/Footer';
 import ProductShop from './components/productshop/ProductShop';
 import CartPage from './components/Cart/CartPage';
 import CartStore from './components/Store/CartStore';
+import GlassesTryOn from './components/GlassesOnFace/GlassesTryOn';
+import TryOnGlassesPage from './pages/TryOnGlassesPage';
 
 const App: React.FC = () => {
   const [sideBar, setSideBar] = useState<boolean>(false);
@@ -38,7 +40,8 @@ const App: React.FC = () => {
       <Route path='/ProductDetailShop' element={<ProductDetailPage/>}/>
       <Route path='/CartPage' element={<CartPage/>}/>
       <Route path='/CartStore' element={<CartStore/>}/>
-
+ <Route path='/GlassesTryOn' element={<GlassesTryOn/>}/>
+      <Route path='/TryOnGlassesPage' element={<TryOnGlassesPage/>}/>
    
      </Routes>
   <Footer/>

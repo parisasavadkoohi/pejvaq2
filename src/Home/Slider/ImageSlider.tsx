@@ -31,7 +31,14 @@ const ImageSlider: React.FC = () => {
             <img src={image} alt={`Slide ${index + 1}`} className="w-100 h-74 object-cover rounded-lg" />
           </div>
         ))}
+
       </Slider>
+      <div className="balloons-container">
+    <div className="balloon balloon1"></div>
+    <div className="balloon balloon2"></div>
+    <div className="balloon balloon3"></div>
+</div>
+
     </div>
   );
 };

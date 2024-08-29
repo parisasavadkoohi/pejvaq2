@@ -60,7 +60,7 @@ return(
       src={`https://back.pejvaq.com${storeInfo.LogoPictureUrl}`}
       alt="Store Logo"
      
-      className="w-32 h-32 p-1 z-10 relative object-cover  rounded-full border border-gray-200 img-shadow  mb-2 blink  "style={{ marginTop: '-5rem' }}
+      className="lg:w-32 h-32 sm:w-2 p-1 z-10 relative object-cover  rounded-full border border-gray-200 img-shadow  mb-2 blink  "style={{ marginTop: '-5rem' }}
       
       />
       <h1 className="text-2xl font-bold p-1 "style={{position:'relative',top:'-30%'}}>{storeInfo.Name}</h1>

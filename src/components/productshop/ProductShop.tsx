@@ -4,10 +4,10 @@ import "aos/dist/aos.css";
 import "tailwindcss/tailwind.css";
 import { useNavigate } from 'react-router-dom';
 
-import imageshop1 from '../../components/assets/images/image2.png';
-import imageshop2 from '../../components/assets/images/image5.png';
-import imageshop3 from '../../components/assets/images/image2.png';
-import imageshop4 from '../../components/assets/images/image5.png';
+import imageshop1 from '../../components/assets/images/images4_11zon.png';
+import imageshop2 from '../../components/assets/images/images3_11zon.png';
+import imageshop3 from '../../components/assets/images/images6_11zon.png';
+import imageshop4 from '../../components/assets/images/عینک(1).png';
 import imageshop5 from '../../components/assets/images/image2.png';
 import imageshop6 from '../../components/assets/images/image2.png';
 
@@ -52,7 +52,33 @@ const ProductShop: React.FC = () => {
       },
     },
     {
+      Id: "3",
+      Name: "محصول ۲",
+      ShortDescription: "این یک توضیحات کوتاه برای محصول ۲ است.",
+      Sku: "SKU002",
+      SeName: "product-2",
+      ProductPrice: {
+        Price: "200,000 تومان",
+      },
+      DefaultPictureModel: {
+        ImageUrl: imageshop3,
+      },
+    },
+    {
       Id: "2",
+      Name: "محصول ۲",
+      ShortDescription: "این یک توضیحات کوتاه برای محصول ۲ است.",
+      Sku: "SKU002",
+      SeName: "product-2",
+      ProductPrice: {
+        Price: "200,000 تومان",
+      },
+      DefaultPictureModel: {
+        ImageUrl: imageshop4,
+      },
+    },
+    {
+      Id: "4",
       Name: "محصول ۲",
       ShortDescription: "این یک توضیحات کوتاه برای محصول ۲ است.",
       Sku: "SKU002",
@@ -100,6 +126,12 @@ const ProductShop: React.FC = () => {
                 onClick={() => navigate(`/ProductDetailShop/${product.Id}`)} // تغییر به استفاده از Id
               >
                 🛒
+              </button>
+              <button
+                className="bg-green-200 text-white p-2 rounded-full hover:bg-green-600 transition-colors cursor-pointer img-shadow transform hover:scale-105"
+                onClick={() => navigate(`/TryOnGlassesPage`)} // Navigate to TryOnGlassesPage
+              >
+                🕶️
               </button>
             </div>
           </div>

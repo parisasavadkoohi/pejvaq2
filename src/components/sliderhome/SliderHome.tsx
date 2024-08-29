@@ -41,9 +41,9 @@ const SliderHome: React.FC<RelatedProductsProps> = ({ productId }) => {
   }
 
   return (
-    <div className="bg-blue-800 p-20  mx-4 my-8 rounded-lg shadow-lg">
+    <div className="bg-blue-800 lg:p-20  lg:mx-4 lg:my-8 rounded-lg shadow-lg">
       
-      <div className="container mx-auto p-2 m-2">
+      <div className="container mx-auto lg:p-2 lg:m-2">
       
         {products.length > 0 ? (
           <Swiper
@@ -79,11 +79,11 @@ const SliderHome: React.FC<RelatedProductsProps> = ({ productId }) => {
                   <img
                     src={"https://back.pejvaq.com" + product.DefaultPictureModel.FullSizeImageUrl}
                     alt={product.DefaultPictureModel.AlternateText || product.Name}
-                    className="w-100 h-48 p-2 object-cover content-center justify-between transition-transform duration-300 hover:scale-105 m-5"
+                    className="w-100 h-48 p-2  object-cover content-center justify-between transition-transform duration-300 hover:scale-105 m-5"
                     onClick={() => navigate(`/ProductDetailPage/${product.SeName}`)}
                   />
                   <div className="p-4 text-center bg-white">
-                    <h2 className="text-lg text-black font-semibold mb-2 truncate">{product.Name}</h2>
+                    <h2 className="lg:text-lg sm:text-sm text-black font-semibold mb-2 truncate">{product.Name}</h2>
                     <p className="text-sm font-bold text-black p-3"dir='rtl'>
                       {product.ProductPrice?.Price || 'قیمت موجود نیست'}
                     </p>
